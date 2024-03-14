@@ -14,12 +14,7 @@
 
 >  Note that our datasets were cleaned in the same format, but we give information to access the original sources.
 
-
-## Original Source
-
-### 01_synthetic_datasets
-- The re-generataion synthetic dataset codes are available in "src/utilities/gen_synthetic.py"
-- ## Data dic for each JSON file
+## Data dic for each JSON file
 
 Attribute Name   | Meaning
 -------------    | -------------
@@ -30,6 +25,13 @@ ts               | time series data (Y)
 trend            | trend component (T)
 seasonal         | seasonal component (S)
 residual         | residual component (R)
+
+
+## Data Source
+
+### 01_synthetic_datasets
+- The re-generataion synthetic dataset codes are available in "src/utilities/gen_synthetic.py"
+
 
 ### 02_Real1_datasets
 - All URLs and details of original datasets are available "Reference" in our publication.
@@ -45,7 +47,7 @@ Sunspot         | [Sunspot Index and Long-term Solar Observations](https://www.s
 
 
 ### 03_Real2_datasets
-- We exported a list for each dataset and source in "cran_list.csv" 
+- We exported a list for each dataset and source in "cran_list_datasets.csv" 
 - **Please be careful some libraries overwrite some datasets.**
 - CRAN package URL:
     - [astsa](https://cran.r-project.org/web/packages/astsa/index.html) >= 2.1    ** CRAN dataset
