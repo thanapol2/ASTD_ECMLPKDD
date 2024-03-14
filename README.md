@@ -1,22 +1,22 @@
 
-# Streamlined Seasonal-Trend Decomposition (SSTD)
+# Adaptive Seasonal-Trend Decomposition (ASTD)
 
-- This is an official implementation of "Streamlined Seasonal-Trend Decomposition (SSTD) for Online Time Series Decomposition with Seasonal Transitions and Fluctuations" (SSTD).
-- SSTD was implemented using Python 3.9.2.
+- This is an official implementation of "Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Seasonality Transitions and Fluctuations" (ASTD).
+- ASTD was implemented using Python 3.9.2.
 - Existing methods were implemented using Python 3.9.2 and R 4.3.0
 
 - If you have any more questions or need further suggestions, don't hesitate to email me.
 
 ## Document material
-- [Supplementary material](https:)
+- [Supplementary websit](https://sites.google.com/view/astd-ecmlpkdd/)
 
 
 ## Folder structure 
     .
     ├── dataset                            # Datasets were utilized in this paper. 
-    │   ├── 01_synthetic_dataset           
-    │   ├── 02_CRAN_dataset               
-    │   └── 03_Long_length_dataset
+    │   ├── 01_synthetic_datasets           
+    │   ├── 02_Real1_datasets             
+    │   └── 03_Real2_datasets
     │   └── README.md                      # Readme for dataset folder
     ├── evaluation                         # All source codes for reproduction
     │   ├── Numerical_error_computation 
