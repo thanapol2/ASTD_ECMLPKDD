@@ -6,9 +6,9 @@
 
 ## Folder structure 
     .
-    ├── 01_synthetic_dataset           # Two synthetics dataset
-    └── 02_seasonal_changes_dataset    # Real-world datasets within seasonal length changes
-    ├── 03_CRAN_dataset                # Real-world dataset from The Comprehensive R Archive Network (CRAN) 
+    ├── 01_synthetic_datasets          # Two synthetics dataset
+    ├── 02_Real1_datasets              # Real-world datasets with seasonality transitions and fluctuations
+    ├── 03_Real2_datasets              # Real-world dataset from The Comprehensive R Archive Network (CRAN) 
     └── README.md                      
 
 
@@ -17,20 +17,21 @@
 
 ## Original Source
 
-### 01_synthetic_dataset
+### 01_synthetic_datasets
 - The re-generataion synthetic dataset codes are available in "src/utilities/gen_synthetic.py"
 - ## Data dic for each JSON file
 
 Attribute Name   | Meaning
 -------------    | -------------
 main_length      | length of main seasonal component
-changing_point   | answer of seasonal changing point
+transition_points| answer of answer of starting point of seasonality transitions
+main_length_ts   | answer of season length of each timestamp
 ts               | time series data (Y)
 trend            | trend component (T)
 seasonal         | seasonal component (S)
 residual         | residual component (R)
 
-### 02_seasonal_changes_dataset
+### 02_Real1_datasets
 - All URLs and details of original datasets are available "Reference" in our publication.
 - List URL
 
@@ -43,7 +44,7 @@ SOI             | [Southern Oscillation Index (SOI) from National Oceanic and At
 Sunspot         | [Sunspot Index and Long-term Solar Observations](https://www.sidc.be/SILSO/datafiles)
 
 
-### 03_CRAN_dataset
+### 03_Real2_datasets
 - We exported a list for each dataset and source in "cran_list.csv" 
 - **Please be careful some libraries overwrite some datasets.**
 - CRAN package URL:
