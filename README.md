@@ -20,7 +20,8 @@
     │   └── README.md                      # Readme for dataset folder
     ├── evaluation                         # All source codes for reproduction
     │   ├── Numerical_error_computation 
-    │   ├── Time_complexity    
+    │   ├── 01_synthetic_datasets          # Reproduction for synthetic datasets
+    │   ├── 02_Real1_datasets              # Reproduction for Real1
     │   ├── utility_evaluation.R           # Utility function for evaluation with R
     │   ├── README.MD                      # Readme for evaluation folder
     ├── src                                # Source files
@@ -33,11 +34,14 @@
 
 ## Dependencies
 ### Python
-- [numpy](http://www.numpy.org/) >=1.26.4
+- [numpy] >=1.26.4
 - [scipy] >= 1.12.0
-- [statsmodel] >= 0.14.1
+- [pandas] >= 2.2.1
 - [matplotlib] >= 3.8.2
+- [tqdm](https://tqdm.github.io) >= 4.64.1
+- [statsmodel](https://www.statsmodels.org/stable/index.html) >= 0.14.1
 - [periodicity-detection](https://periodicity-detection.readthedocs.io/en/latest/) >= 0.1.1    ** For existing SLE methods
+- [scikit-learn](https://scikit-learn.org/stable/) >= 1.4.1   ** For mean square error computation in STD evaluations.  
 
 ### R
 - [sazedR](https://cran.r-project.org/web/packages/sazedR/index.html) >= 2.0.2    ** SAZED method

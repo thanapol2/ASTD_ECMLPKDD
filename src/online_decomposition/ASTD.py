@@ -1,15 +1,7 @@
-import math
 import numpy as np
-from statsmodels.tsa.seasonal import STL
 import src.utilities.utility_stl as utility_stl
 from scipy.fft import fft, fftfreq
 import src.utilities.utility_frequency_analysis as utility_frequency
-from statsmodels.nonparametric.smoothers_lowess import lowess
-import matplotlib.pyplot as plt
-
-# Z-euclidean
-# Based on Distance Bounds [Implications of Z-Normalization in the
-# Matrix Profile]
 
 class ASTD():
 
@@ -62,8 +54,6 @@ class ASTD():
         self._update_peridogogram_den()
 
         # HAQSE Phase
-        # location, k_hat = utility_frequency.get_period_hints(self.periodogram_den)
-        # k_peak, frequency_peak = utility_frequency.old_haqse(self.X, k_hat, self.xfreq[1] - self.xfreq[0])
         k_peak, frequency_peak = utility_frequency.haqse(self.periodogram_den, self.X)
         # HAQSE Phase
 
@@ -126,8 +116,6 @@ class ASTD():
         self._update_peridogogram_den()
 
         # find M
-        # location, k_hat = utility_frequency.get_period_hints(self.periodogram_den)
-        # k_peak, frequency_peak = utility_frequency.old_haqse(self.X, k_hat, self.xfreq[1] - self.xfreq[0])
         k_peak, frequency_peak = utility_frequency.haqse(self.periodogram_den, self.X)
         # avoid main_length 0 and W length
         # if (k_hat > 1) & (k_peak > 1):
@@ -166,63 +154,3 @@ class ASTD():
 
         return Ti, Si, Ri
 
-
-    def bak_initialization_phase_with_nonsym(self, xi: np.ndarray):
-        # de initiation trend phase
-        for idx, xi in enumerate(xi):
-            self.W = utility_stl.update_array(self.W, xi)
-
-            # de initiation trend
-            t1 = utility_stl.trend_filter(weights=self.kernel_c, data=self.W)
-            t_diff = xi - t1
-            self.t1_diff_W = utility_stl.update_array(self.t1_diff_W, t_diff)
-            t1_lagg = utility_stl.trend_filter(weights=self.kernel_c, data=self.t1_diff_W)
-
-            # Initiation trend
-            self.T1 = utility_stl.update_array(self.T1, t1 + t1_lagg)
-
-            # Diff X-T1
-            newest_dt = self.W[-1] - t1 + t1_lagg
-            self.X = utility_stl.update_array(self.X, newest_dt)
-
-        # SLE X phase and find M
-        self.start_fft = fft(self.X)
-        self._update_peridogogram_den()
-
-        # location, k_hat = utility_frequency.get_period_hints(self.periodogram_den)
-        k_peak, frequency_peak = utility_frequency.haqse(self.periodogram_den, self.X)
-        # seasonality found
-        # if (k_hat > 1) & (k_peak > 1):
-        if round(k_peak) > 1:
-            self.seasonal_length = round(1 / frequency_peak)
-            for idx, xi in enumerate(self.W):
-                if idx < self.seasonal_length:
-                    self.S[idx] = self.X[idx]
-                else:
-                    self.S[idx] = utility_stl.seasonality_filter(d=self.X[idx],
-                                                                 Epsilon_r=self.S[idx - self.seasonal_length],
-                                                                 gamma=self.gamma)
-        else:
-            self.seasonal_length = 0
-            self.S = np.zeros(self.N)
-
-
-        # Desasonalized from W
-        self.DS = self.W - self.S
-
-        # Final trend
-        t5_buffer = np.zeros(self.N)
-        for idx, dsi in enumerate(self.DS):
-            t5_buffer = utility_stl.update_array(t5_buffer, dsi)
-            t5 = utility_stl.trend_filter(weights=self.kernel_c, data=t5_buffer)
-            ds_diff = dsi - t5
-
-            self.ds_diff_W = utility_stl.update_array(self.ds_diff_W, ds_diff)
-            t5_lagg = utility_stl.trend_filter(weights=self.kernel_c, data=self.ds_diff_W)
-
-            self.T = utility_stl.update_array(self.T, t5 + t5_lagg)
-        #
-        #
-        self.R = self.W - self.T - self.S
-
-        return self.T, self.S, self.R
