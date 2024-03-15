@@ -14,28 +14,27 @@
 
 >  Note that our datasets were cleaned in the same format, but we give information to access the original sources.
 
-## Data dic for each JSON file
+## Data dictionary for each JSON file
 
 Attribute Name   | Meaning
 -------------    | -------------
-main_length      | length of main seasonal component
-transition_points| answer of answer of starting point of seasonality transitions
-main_length_ts   | answer of season length of each timestamp
-ts               | time series data (Y)
-trend            | trend component (T)
-seasonal         | seasonal component (S)
-residual         | residual component (R)
+main_length      | Main season length of seasonal component
+transition_points| Starting point of seasonality transitions
+main_length_ts   | Season length for each timestamp
+ts               | Time series data (Y)
+trend            | Trend component (T)
+seasonal         | Seasonal component (S)
+residual         | Residual component (R)
 
 
 ## Data Source
 
 ### 01_synthetic_datasets
-- The re-generataion synthetic dataset codes are available in "src/utilities/gen_synthetic.py"
-
+- The code for generating synthetic datasets can be found in "src/utilities/gen_synthetic.py".
 
 ### 02_Real1_datasets
-- All URLs and details of original datasets are available "Reference" in our publication.
-- List URL
+- All URLs and details of the original datasets can be found in the 'Experimental Settings' section of our publication.
+- List URLs:
 
 Dataset Name    | URL
 -------------   | -------------
@@ -49,7 +48,7 @@ Sunspot         | [Sunspot Index and Long-term Solar Observations](https://www.s
 ### 03_Real2_datasets
 - We exported a list for each dataset and source in "cran_list_datasets.csv" 
 - **Please be careful some libraries overwrite some datasets.**
-- CRAN package URL:
+- CRAN package URLs:
     - [astsa](https://cran.r-project.org/web/packages/astsa/index.html) >= 2.1    ** CRAN dataset
     - [fpp2](https://cran.r-project.org/web/packages/fpp2/index.html) >= 2.5    ** CRAN dataset
     - [expsmooth](https://cran.r-project.org/web/packages/expsmooth/index.html) >= 2.3    ** CRAN dataset
