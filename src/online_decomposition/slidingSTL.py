@@ -3,7 +3,7 @@ from statsmodels.tsa.seasonal import STL
 from src.online_decomposition.base_STL import base_STL
 
 
-class OnlineClassicalSTL(base_STL):
+class slidingSTL(base_STL):
     """
     Online with classical STL [1]
     REF:
@@ -15,7 +15,7 @@ class OnlineClassicalSTL(base_STL):
             Proc. VLDB Endow. 15, 7 (March 2022), 1417–1425.
     """
 
-    def __init__(self, max_season_length: int):
+    def __init__(self, max_season_length: int, max_cycles: int = 4):
         """
         Initialize phase (offline phase)
 
@@ -25,8 +25,8 @@ class OnlineClassicalSTL(base_STL):
             Maximum seasonality length (m)
         """
         self.max_season_length = max_season_length
-        self.buffer = np.zeros(4 * max_season_length, float)
-        self.buffer_size = 4 * max_season_length
+        self.buffer = np.zeros(max_cycles * max_season_length, float)
+        self.buffer_size = max_cycles * max_season_length
 
     def initialize_phase(self, input_data: np.ndarray):
         """

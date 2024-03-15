@@ -306,7 +306,7 @@ def qse(w: np.ndarray[float], k: int, frequency_range: float):
     return k_peak, frequency_tone
 
 
-def haqse(w: np.ndarray[float], k: int, frequency_range: float):
+def haqse(periodogram_den: np.ndarray[np.complex128], w: np.ndarray[float]):
     """
     Identify peak frequencies using Hybrid A&M and Q-shift estimator (HAQSE) [1].
     This method is an iterative method to Identify peak frequencies.
@@ -315,19 +315,17 @@ def haqse(w: np.ndarray[float], k: int, frequency_range: float):
 
     Parameters
     ----------
+    periodogram_den : np.ndarray[np.complex128]
+        periodogram result of the sliding window
     w : np.ndarray
-        1D array representing the data in the sliding window.
-    k : int
-        Index of the DFT peak associated with the maximum magnitude.
-    frequency_range : float
-        Frequency range.
+        1D array representing the data in the sliding window. (detrend series= x)
 
     Returns
     -------
     Tuple[float, float]
         Tuple containing the estimated index (k_peak) and frequency_tone:
         - k_peak: Estimated index of the identified peak (float).
-        - frequency_tone: Frequency value corresponding to the identified peak.
+        - frequency_peak: Frequency value corresponding to the identified peak.
 
     References
     ----------
@@ -335,38 +333,41 @@ def haqse(w: np.ndarray[float], k: int, frequency_range: float):
         in IEEE Transactions on Communications, vol. 67, no. 3, pp. 2333-2342, March 2019,
         doi: 10.1109/TCOMM.2018.2886355.
     """
+    # Step 1: peak identification
+    location, k_hat = get_period_hints(periodogram_den)
 
     # Find the required number of iterations
     N = len(w)
-
     # Set the time index
     n = np.arange(N)
 
-    # First iteration of HAQSE
-    # Start the HAQSE algorithm by applying A&M interpolator first
-    # This computes S_{0.5}
-    Sp5 = np.sum(w * np.exp(-1j * 2 * np.pi / N * (k + 0.5) * n))
-    # And this is S_{-0.5}
-    Sn5 = np.sum(w * np.exp(-1j * 2 * np.pi / N * (k - 0.5) * n))
+    # Step 2: initial delta_alpha calculation
+    # # Start the HAQSE algorithm by applying A&M interpolator first
+    # # This computes S_{0.5}
+    Sp5 = np.sum(w * np.exp(-1j * 2 * np.pi / N * (k_hat + 0.5) * n))
+    # # And this is S_{-0.5}
+    Sn5 = np.sum(w * np.exp(-1j * 2 * np.pi / N * (k_hat - 0.5) * n))
 
-    # Find the fine residual frequency estimate
-    delta_a = (1 / 2) * np.real((Sp5 + Sn5) / (Sp5 - Sn5))
-    # Calculate the optimum shift q_opt
+    # # Find the fine residual frequency estimate
+    delta_a = (1/2) * np.real((Sp5 + Sn5) / (Sp5 - Sn5))
+
+    # Step 3: final delta estimation
+    # # Calculate the optimum shift q_opt
     q = (1 / N) ** (1 / 3)
-    # Calculate c(q)
+    # # Calculate c(q)
     cq = (1 - np.pi * q * np.tan(np.pi * q)) / (q * np.cos(np.pi * q) ** 2)
 
-    # Second iteration of HAQSE
-    # The HAQSE algorithm is finalized by applying the QSE interpolator
-    # This computes S_{0.25}
-    Spq = np.sum(w * np.exp(-1j * 2 * np.pi / N * (k + q + delta_a) * n))
-    # And this is S_{-0.25}
-    Snq = np.sum(w * np.exp(-1j * 2 * np.pi / N * (k - q + delta_a) * n))
+    # # Second iteration of HAQSE
+    # # The HAQSE algorithm is finalized by applying the QSE interpolator
+    # # This computes S_{k_hat + delta_a + q}
+    Spq = np.sum(w * np.exp(-1j * 2 * np.pi / N * (k_hat + q + delta_a) * n))
+    # And this is S_{k_hat + delta_a - q}
+    Snq = np.sum(w * np.exp(-1j * 2 * np.pi / N * (k_hat - q + delta_a) * n))
 
     # Find the finer residual frequency estimate
     delta_h = np.real((Spq - Snq) / (Spq + Snq)) / cq + delta_a
 
     # Finally, produce the frequency estimate
-    k_peak = k + delta_h
-    frequency_tone = k_peak * frequency_range
-    return k_peak, frequency_tone
+    k_peak = k_hat + delta_h
+    frequency_peak = k_peak / N
+    return k_peak, frequency_peak
