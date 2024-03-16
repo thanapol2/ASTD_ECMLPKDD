@@ -16,6 +16,8 @@ def sinewave(length: int, period: int, amplitude: int):
 
     return seasonal[:length]
 
+
+def generate_syn1(filename: str = "syn1.json", is_export=False):
     """
     All datasets are export into JSON files
     Data dic :
@@ -28,7 +30,6 @@ def sinewave(length: int, period: int, amplitude: int):
     7. residual denotes residual component (R)
     """
 
-def generate_syn1(filename: str = "syn1.json", is_export=False):
     np.random.seed(0)
     trend_increase = np.linspace(0, 2, num=2200)
     trend_stability = np.ones(600) + 1
@@ -66,6 +67,18 @@ def generate_syn1(filename: str = "syn1.json", is_export=False):
 
 
 def generate_syn2(filename: str = "syn2.json", is_export=False):
+    """
+    All datasets are export into JSON files
+    Data dic :
+    1. main_length denotes season length of seasonal component
+    2. transition_points denotes answer of starting point of seasonality transitions
+    3  main_length_ts denotes answer of season length of each timestamp
+    4. ts denotes time series data (y)
+    5. trend denotes trend component (T)
+    6. seasonal denotes seasonal component (S)
+    7. residual denotes residual component (R)
+    """
+
     np.random.seed(0)
 
     total_cycle = 60

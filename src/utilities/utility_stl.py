@@ -78,9 +78,9 @@ def trend_filter(weights: np.ndarray, data: np.ndarray):
     return t_i
 
 
-def seasonality_filter(d: float, Epsilon_r: float, gamma: float):
-    de_Epsilon_r = gamma * d + (1 - gamma) * Epsilon_r
-    return de_Epsilon_r
+def seasonality_filter(x_t: float, s_pre: float, gamma: float):
+    s_t = gamma * x_t + (1 - gamma) * s_pre
+    return s_t
 
 
 def Znormalization(data: np.ndarray):
@@ -137,27 +137,6 @@ def calculate_smoothness(ts):
 
     return smoothness_measure
 
-
-def calculate_rate_of_change(ts, seasonality_length):
-    """
-    Calculate the rate of change of the seasonal component (Evaluate CRAN dataset)
-    """
-    n = len(ts)
-    num_cycles = -(-n // seasonality_length)
-    padding_size = num_cycles * seasonality_length - n
-    # Pad ts with None
-    ts = np.concatenate([ts, np.full(padding_size, np.nan)])
-    results = np.array([])
-    for cycle_index in range(seasonality_length):
-        subseasonality_ts = [ts[cycle_index + (i * seasonality_length)] for i in range(num_cycles)]
-        subseasonality_ts = np.array(subseasonality_ts)
-        subseasonality_ts = subseasonality_ts[~np.isnan(subseasonality_ts)]
-        differences = np.diff(subseasonality_ts)
-        time_diff = np.diff(range(len(subseasonality_ts)))
-        rate_of_change = differences / time_diff
-        results = np.concatenate([results, rate_of_change])
-
-    return np.mean(results), np.std(results)
 
 # wait to cleaning parameter
 def animate_streaming_STL(full_data, full_trend_component, results: list[dict], file_name: str):
