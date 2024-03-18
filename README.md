@@ -1,7 +1,7 @@
 
 # Adaptive Seasonal-Trend Decomposition (ASTD)
 
-- This is an official implementation of "Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Seasonality Transitions and Fluctuations" (ASTD).
+- This is an official implementation of "Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Transitions and Fluctuations in Seasonality" (ASTD).
 - ASTD was implemented using Python 3.9.2.
 - Existing methods were implemented using Python 3.9.2 and R 4.3.0
 
