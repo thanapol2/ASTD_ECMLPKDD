@@ -40,8 +40,9 @@ Dataset Name    | URL
 -------------   | -------------
 WalkJogRun1     | [Matrix Profile VIII supplementary website](https://sites.google.com/site/onlinesemanticsegmentation/)
 WalkJogRun2     | [Matrix Profile VIII supplementary website](https://sites.google.com/site/onlinesemanticsegmentation/)
+CO2             | [Trends in Atmospheric Carbon Dioxide from National Oceanic and Atmospheric Administration](https://doi.org/10.15138/9N0H-ZH07)
 Canadian lynx   | [fma package from CRAN](https://search.r-project.org/CRAN/refmans/fma/html/lynx.html)
-SOI             | [Southern Oscillation Index (SOI) from National Oceanic and Atmospheric Administration](https://www.ncei.noaa.gov/access/monitoring/enso/soi)
+SOI             | [Southern Oscillation Index (SOI) from National Centers for Enviromental Information](https://www.ncei.noaa.gov/access/monitoring/enso/soi)
 Sunspot         | [Sunspot Index and Long-term Solar Observations](https://www.sidc.be/SILSO/datafiles)
 
 
