@@ -18,12 +18,10 @@
     │   ├── 02_Real1_datasets             
     │   └── 03_Real2_datasets
     │   └── README.md                      # Readme for dataset folder
-    ├── evaluation                         # All source codes for reproduction
-    │   ├── Numerical_error_computation 
+    ├── evaluation                         # All source codes for reproduction 
     │   ├── 01_synthetic_datasets          # Reproduction for synthetic datasets
     │   ├── 02_Real1_datasets              # Reproduction for Real1
-    │   ├── utility_evaluation.R           # Utility function for evaluation with R
-    │   ├── README.MD                      # Readme for evaluation folder
+    │   └── utility_evaluation.R           # Utility function for evaluation with R
     ├── src                                # Source files
     │   ├── utilities                      # Utility functions
     │   └── online_decomposition           # Online Time series decomposition
