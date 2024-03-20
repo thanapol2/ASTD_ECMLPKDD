@@ -20,11 +20,10 @@
     │   └── README.md                      # Readme for dataset folder
     ├── document                           # Supplmentary file
     ├── evaluation                         # All source codes for reproduction
-    │   ├── 00_HAQSE                       # Reproduction for HAQSE estimator 
+    │   ├── 00_HAQSE                       # Reproduction for HAQSE estimator
     │   ├── 01_synthetic_datasets          # Reproduction for synthetic datasets
     │   ├── 02_Real1_datasets              # Reproduction for Real1
-    │   ├── utility_evaluation.R           # Utility function for evaluation with R
-    │   ├── README.MD                      # Readme for evaluation folder
+    │   └── utility_evaluation.R           # Utility function for evaluation with R
     ├── src                                # Source files
     │   ├── utilities                      # Utility functions
     │   └── online_decomposition           # Online Time series decomposition
