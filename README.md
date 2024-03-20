@@ -16,10 +16,11 @@
     ├── dataset                            # Datasets were utilized in this paper. 
     │   ├── 01_synthetic_datasets           
     │   ├── 02_Real1_datasets             
-    │   └── 03_Real2_datasets
+    │   ├── 03_Real2_datasets
     │   └── README.md                      # Readme for dataset folder
+    ├── document                           # Supplmentary file
     ├── evaluation                         # All source codes for reproduction
-    │   ├── Numerical_error_computation 
+    │   ├── 00_HAQSE                       # Reproduction for HAQSE estimator 
     │   ├── 01_synthetic_datasets          # Reproduction for synthetic datasets
     │   ├── 02_Real1_datasets              # Reproduction for Real1
     │   ├── utility_evaluation.R           # Utility function for evaluation with R
