@@ -24,6 +24,7 @@
     │   ├── 01_synthetic_datasets          # Reproduction for synthetic datasets
     │   ├── 02_Real1_datasets              # Reproduction for Real1
     │   └── utility_evaluation.R           # Utility function for evaluation with R
+    ├── figures                             
     ├── src                                # Source files
     │   ├── utilities                      # Utility functions
     │   └── online_decomposition           # Online Time series decomposition
