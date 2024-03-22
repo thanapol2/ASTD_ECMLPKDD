@@ -8,7 +8,7 @@
 - If you have any more questions or need further suggestions, don't hesitate to email me.
 
 ## Document material
-- [Supplementary websit](https://sites.google.com/view/astd-ecmlpkdd/)
+- [Supplementary website](https://sites.google.com/view/astd-ecmlpkdd/)
 
 
 ## Folder structure 
