@@ -1,5 +1,8 @@
+# ** This paper was accepted in ECML-PKDD 2024 **
+> We are currently updating all information as soon as possible.
 
 # Adaptive Seasonal-Trend Decomposition (ASTD)
+
 
 - This is an official implementation of "Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Transitions and Fluctuations in Seasonality" (ASTD).
 - ASTD was implemented using Python 3.9.2.
