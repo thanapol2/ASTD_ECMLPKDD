@@ -1,8 +1,10 @@
 # ** This paper was accepted in ECML-PKDD 2024 **
 > We are currently updating all information as soon as possible.
 
-# Adaptive Seasonal-Trend Decomposition (ASTD)
+![alt text](https://github.com/thanapol2/Mean_EBinning/blob/082cd9447659d9d140acc38d5d4c11db9187d06c/Documents/shizuoka%20bannar.png)
 
+
+# Adaptive Seasonal-Trend Decomposition (ASTD)
 
 - This is an official implementation of "Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Transitions and Fluctuations in Seasonality" (ASTD).
 - ASTD was implemented using Python 3.9.2.
@@ -27,7 +29,7 @@
     │   ├── 01_synthetic_datasets          # Reproduction for synthetic datasets
     │   ├── 02_Real1_datasets              # Reproduction for Real1
     │   └── utility_evaluation.R           # Utility function for evaluation with R
-    ├── figures                             
+    ├── figures                            # Reproduction for Figures in this paper 
     ├── src                                # Source files
     │   ├── utilities                      # Utility functions
     │   └── online_decomposition           # Online Time series decomposition
@@ -55,13 +57,21 @@
 - [fma](https://cran.r-project.org/web/packages/fma/index.html) >= 2.5    ** CRAN dataset
 
 ** Please be careful some libraries overwrite some datasets. 
-## Citing
-
 
 ## BibTex
-
+- If you plan to use or apply our source code, please cite our published paper. Note that the DOI and BibTeX will be updated after our publication appears online.
+```
+@inproceedings{ASTD_ECMLPKDD,
+	author = {Phungtua-Eng, T. and Yamamoto, Y.},
+	booktitle = {Machine Learning and Knowledge Discovery in Databases: Research Track (ECML PKDD 2024)},
+	title = {Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Transitions and Fluctuations in Seasonality},
+	year = {2024},
+	note = {(To appear)}
+}
+```
 
 ## Link
+- [Our laboraory at Shizuoka University](http://lab.inf.shizuoka.ac.jp/yamamoto/)
 
 ## Contact
-
+If you have any question, please contact thanapol@yy-lab.info

@@ -58,5 +58,7 @@ Sunspot         | [Sunspot Index and Long-term Solar Observations](https://www.s
 
 
 
-## BibTex
+## Acknowledgements
+
+We would like to thank the community and everyone who made their datasets publicly accessible. These datasets are valuable and have greatly facilitated this research. 
 

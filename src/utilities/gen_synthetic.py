@@ -34,7 +34,7 @@ def generate_syn1(filename: str = "syn1.json", is_export=False):
     trend_increase = np.linspace(0, 2, num=2200)
     trend_stability = np.ones(600) + 1
     trend_decrease = np.linspace(2, 0, num=2200)
-    trend = np.concatenate((trend_increase, trend_stability, trend_decrease))
+    trend_component = np.concatenate((trend_increase, trend_stability, trend_decrease))
     M_1 = 50
     M_2 = 80
     first_pattern = sinewave(1800, M_1, 1)
@@ -48,16 +48,16 @@ def generate_syn1(filename: str = "syn1.json", is_export=False):
                                     np.repeat(M_2, 1800),
                                     np.repeat(M_1, 1400)))
 
-    residual = 0.03 * np.random.randn(len(trend))
-    ts = trend + seasonal_component + residual
+    residual_component = 0.03 * np.random.randn(len(trend_component))
+    ts = trend_component + seasonal_component + residual_component
 
     data = {'main_length': [M_1, M_2],
             'transition_points': [1800, 3200],
             'main_length_ts': main_length_ts.tolist(),
             'ts': ts.tolist(),
-            'trend': trend.tolist(),
+            'trend': trend_component.tolist(),
             'seasonal': seasonal_component.tolist(),
-            'residual': residual.tolist()}
+            'residual': residual_component.tolist()}
 
     if is_export:
         with open(filename, "w") as outfile:
@@ -128,3 +128,67 @@ def generate_syn2(filename: str = "syn2.json", is_export=False):
 
     return data
 
+def generate_syn3(noise_level = 0.7, filename: str = "syn3.json", is_export=False):
+    """
+    All datasets are export into JSON files
+    Data dic :
+    1. main_length denotes season length of seasonal component
+    2. transition_points denotes answer of starting point of seasonality transitions
+    3  main_length_ts denotes answer of season length of each timestamp
+    4. ts denotes time series data (y)
+    5. trend denotes trend component (T)
+    6. seasonal denotes seasonal component (S)
+    7. residual denotes residual component (R)
+    """
+
+    np.random.seed(0)
+
+    timestamps = np.arange(0, 5000)
+    phase_1_end = 1800
+    phase_2_end = 3000
+    linear_trend_1 = np.linspace(0, 3, num=phase_1_end)
+    time_phase_2 = timestamps[phase_1_end:phase_2_end] - phase_1_end
+    polynomial_trend = - 0.001 * (time_phase_2 ** 2) + 0.1 * time_phase_2
+    trend_min, trend_max = polynomial_trend.min(), polynomial_trend.max()
+    polynomial_trend = 5 * (polynomial_trend - trend_min) / (trend_max - trend_min)
+
+    time_phase_3 = timestamps[phase_2_end:] - phase_2_end
+    exponential_trend = np.exp(0.005 * time_phase_3) - 1
+    trend_min, trend_max = exponential_trend.min(), exponential_trend.max()
+    exponential_trend = 5 * (exponential_trend - trend_min) / (trend_max - trend_min)
+
+    trend_component = np.concatenate((linear_trend_1, exponential_trend, polynomial_trend))
+
+
+    M_1 = 53
+    M_2 = 120
+    first_pattern = sinewave(1800, M_1, 1)
+    second_pattern = sinewave(len(timestamps) - 1800, M_2, 1.5)
+    seasonal_component = np.concatenate((first_pattern, second_pattern))
+
+    residual_component = noise_level * np.random.randn(len(trend_component))
+
+    num_outliers = 100
+    outliers_indices = np.random.choice(len(timestamps), num_outliers, replace=False)
+    outliers_values = np.random.choice([1, -1], num_outliers) * (np.random.uniform(4, 7, num_outliers))
+
+    residual_component[outliers_indices] = outliers_values
+
+    ts = trend_component + seasonal_component + residual_component
+
+    main_length_ts = np.concatenate((np.repeat(M_1, 1800),
+                                     np.repeat(M_2, len(timestamps) - 1800)))
+
+    data = {'main_length': [M_1, M_2],
+            'transition_points': [1800],
+            'main_length_ts': main_length_ts.tolist(),
+            'ts': ts.tolist(),
+            'trend': trend_component.tolist(),
+            'seasonal': seasonal_component.tolist(),
+            'residual': residual_component.tolist()}
+
+    if is_export:
+        with open(filename, "w") as outfile:
+            json.dump(data, outfile)
+
+    return data
