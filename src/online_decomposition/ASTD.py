@@ -14,8 +14,8 @@ class ASTD():
         self.gamma = seasonality_smoothing
         self.N = window_size                                    # N is W size
         self.kernel_c = utility_stl.non_symmetric_weights(self.N)   # non symmetric weights
-        # self.kernel_half_c = utility_stl.non_symmetric_weights(round(self.N/2))
-        # array to store data with N length
+        k = np.arange(self.N)
+        self.twiddle = np.exp(2j * np.pi * k / self.N)          # twiddle factor for SDFT
         self.W = np.zeros(self.N)               # original data at last N size
         self.t1_diff_W = np.zeros(self.N)       # detrend data at last W size for adjust zero lagging
         self.ds_diff_W = np.zeros(self.N)       # detrend (Final) at last W size for adjust zero lagging
@@ -59,14 +59,14 @@ class ASTD():
 
         # seasonality found
         # if (k_hat > 1) & (k_peak > 1):
-        if round(k_peak) > 1:
+        if k_peak > 1:
             self.seasonal_length = round(1 / frequency_peak)
             for idx, xi in enumerate(self.W):
                 if idx < self.seasonal_length:
                     self.S[idx] = self.X[idx]
                 else:
-                    self.S[idx] = utility_stl.seasonality_filter(d=self.X[idx],
-                                                                 Epsilon_r=self.S[idx - self.seasonal_length],
+                    self.S[idx] = utility_stl.seasonality_filter(x_t=self.X[idx],
+                                                                 s_pre=self.S[idx - self.seasonal_length],
                                                                  gamma=self.gamma)
         # seasonality did not found
         else:
@@ -112,18 +112,15 @@ class ASTD():
         self.X = utility_stl.update_array(self.X, x_newest)
 
         # SLE X
-        self.start_fft = utility_frequency.update_sDFT(self.start_fft, x_oldest, x_newest)
+        self.start_fft = utility_frequency.update_sDFT(self.twiddle, self.start_fft, x_oldest, x_newest)
         self._update_peridogogram_den()
 
         # find M
         k_peak, frequency_peak = utility_frequency.haqse(self.periodogram_den, self.X)
         # avoid main_length 0 and W length
-        # if (k_hat > 1) & (k_peak > 1):
-        if round(k_peak) > 1:
+        if k_peak > 1:
             self.seasonal_length = round(1 / frequency_peak)
-            if (2 + self.seasonal_length  >= len(self.S)):
-                print('a')
-            Si = utility_stl.seasonality_filter(d= self.X[-1], Epsilon_r=self.S[ - self.seasonal_length],
+            Si = utility_stl.seasonality_filter(x_t=self.X[-1], s_pre=self.S[-self.seasonal_length],
                                                 gamma=self.gamma)
         else:
             # no seasonal component

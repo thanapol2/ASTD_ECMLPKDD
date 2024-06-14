@@ -104,7 +104,7 @@ def get_period_hints(periodogram_density: np.ndarray[np.complex128], percentile_
     return indices_above_threshold, index_peak
 
 
-def update_sDFT(fft_X: np.ndarray[np.complex128], old_x: float, new_x: float) -> np.ndarray[np.complex128]:
+def old_update_sDFT(fft_X: np.ndarray[np.complex128], old_x: float, new_x: float) -> np.ndarray[np.complex128]:
     """
     Update a signal's Discrete Fourier Transform (sDFT) using sliding DFT.
 
@@ -136,6 +136,38 @@ def update_sDFT(fft_X: np.ndarray[np.complex128], old_x: float, new_x: float) ->
 
     return new_fft_X
 
+## optimal version
+def update_sDFT(twiddle: np.ndarray[np.complex128], fft_X: np.ndarray[np.complex128],
+                old_x: float, new_x: float) -> np.ndarray[np.complex128]:
+    """
+    Update a signal's Discrete Fourier Transform (sDFT) using sliding DFT.
+
+    Parameters
+    ----------
+    twiddle: np.ndarray[np.complex128]
+        twiddle factor.
+    fft_X : np.ndarray[np.complex128]
+        Previous sDFT.
+    old_x : float
+        Value to be replaced in the original sDFT.
+    new_x : float
+        New value to replace the old value.
+
+    Returns
+    -------
+    np.ndarray[np.complex128]
+        New sDFT.
+
+    References
+    ----------
+    [1] E. Jacobsen and R. Lyons, "The sliding DFT," in IEEE Signal Processing Magazine,
+       vol. 20, no. 2, pp. 74-80, March 2003, doi: 10.1109/MSP.2003.1184347.
+    [2] E. Jacobsen and R. Lyons, "An update to the sliding DFT," in IEEE Signal Processing Magazine,
+       vol. 21, no. 1, pp. 110-111, Jan. 2004, doi: 10.1109/MSP.2004.1516381.
+    """
+    new_fft_X = (fft_X - old_x + new_x) * twiddle
+
+    return new_fft_X
 
 def quin2_estimator(fft_X: np.ndarray[np.complex128], k: int, frequency_range: float):
     """

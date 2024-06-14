@@ -1,5 +1,5 @@
 
-# Dataset folder
+# Datasets folder
 
 - These are all datasets that are utilized in our paper
 
@@ -27,7 +27,7 @@ seasonal         | Seasonal component (S)
 residual         | Residual component (R)
 
 
-## Data Source
+## Original Sources
 
 ### 01_synthetic_datasets
 - The code for generating synthetic datasets can be found in "src/utilities/gen_synthetic.py".
@@ -56,9 +56,4 @@ Sunspot         | [Sunspot Index and Long-term Solar Observations](https://www.s
     - [fma](https://cran.r-project.org/web/packages/fma/index.html) >= 2.5    ** CRAN dataset
 
 
-
-
-## Acknowledgements
-
-We would like to thank the community and everyone who made their datasets publicly accessible. These datasets are valuable and have greatly facilitated this research. 
-
+  

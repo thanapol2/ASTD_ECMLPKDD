@@ -12,16 +12,6 @@ def tricube_kernel(u: float):
         return 0
 
 
-def symmetric_weights_bak(buffer_length: int, input_lambda: int):
-    weights = np.zeros((buffer_length, buffer_length))
-
-    for i in range(buffer_length):
-        for j in range(buffer_length):
-            u = abs((i - j) / input_lambda)
-            weights[i][j] = tricube_kernel(u)
-
-    return weights
-
 
 # for symmetric_w ([x_{t-lambda/2},... x_{t-1}, x_t, x{t+1},...,x_{t+lambda/2})
 # lambda must be buffer_size/2
@@ -57,17 +47,6 @@ def symmetric_trend_filter(input_data: np.ndarray, buffer_size: int):
     return smoothed_trend
 
 
-def symmetric_trend_filter_bak(buffer: np.ndarray, input_lambda: int):
-    buffer_length = len(buffer)
-    weights = symmetric_weights_bak(buffer_length, input_lambda)
-    smoothed_trend = np.zeros(buffer_length)
-    for i in range(buffer_length):
-        local_weights = weights[i]
-        smoothed_trend[i] = trend_filter(weights=local_weights, data=buffer)
-
-    return smoothed_trend
-
-
 def non_symmetric_weights(input_lambda: int):
     weights = [tricube_kernel((input_lambda - k) / input_lambda) for k in range(1, input_lambda + 1)]
     return np.array(weights)
@@ -89,17 +68,6 @@ def Znormalization(data: np.ndarray):
     data_normalized = data - mean
     data_normalized /= std_dev
     return data_normalized
-
-
-def Zeuclidean_distance(main_array: np.ndarray, target_list: list[np.ndarray],
-                        threshold: float):
-    main_array = Znormalization(main_array)
-    is_anomaly = False
-    for sub_cycle in target_list:
-        euclidean_distance = np.sqrt(np.sum((main_array - sub_cycle) ** 2))
-        if euclidean_distance > threshold:
-            is_anomaly = True
-    return is_anomaly
 
 
 def update_array(x: np.ndarray, y):

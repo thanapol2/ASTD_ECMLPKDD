@@ -1,5 +1,4 @@
-# ** This paper was accepted in ECML-PKDD 2024 **
-> We are currently updating all information as soon as possible.
+
 
 ![alt text](https://github.com/thanapol2/Mean_EBinning/blob/082cd9447659d9d140acc38d5d4c11db9187d06c/Documents/shizuoka%20bannar.png)
 
@@ -7,6 +6,7 @@
 # Adaptive Seasonal-Trend Decomposition (ASTD)
 
 - This is an official implementation of "Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Transitions and Fluctuations in Seasonality" (ASTD).
+- ** This paper was accepted in ECML-PKDD 2024 ** 
 - ASTD was implemented using Python 3.9.2.
 - Existing methods were implemented using Python 3.9.2 and R 4.3.0
 
@@ -18,7 +18,7 @@
 
 ## Folder structure 
     .
-    ├── dataset                            # Datasets were utilized in this paper. 
+    ├── datasets                            # Datasets were utilized in this paper. 
     │   ├── 01_synthetic_datasets           
     │   ├── 02_Real1_datasets             
     │   ├── 03_Real2_datasets
@@ -48,6 +48,7 @@
 - [statsmodel](https://www.statsmodels.org/stable/index.html) >= 0.14.1
 - [periodicity-detection](https://periodicity-detection.readthedocs.io/en/latest/) >= 0.1.1    ** For existing SLE methods
 - [scikit-learn](https://scikit-learn.org/stable/) >= 1.4.1   ** For mean square error computation in STD evaluations.  
+- [rpy2](https://rpy2.github.io/) >= 3.5.16 ** For R running in python
 
 ### R
 - [sazedR](https://cran.r-project.org/web/packages/sazedR/index.html) >= 2.0.2    ** SAZED method
@@ -75,3 +76,8 @@
 
 ## Contact
 If you have any question, please contact thanapol@yy-lab.info
+
+## Acknowledgements
+
+We would like to thank the community and everyone who made their datasets and source codes publicly accessible. These datasets are valuable and have greatly facilitated this research. 
+
