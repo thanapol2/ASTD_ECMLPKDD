@@ -6,7 +6,7 @@
 # Adaptive Seasonal-Trend Decomposition (ASTD)
 [![ECML](https://img.shields.io/badge/ECML-2024-blue.svg?style=flat-square)](https://2024.ecmlpkdd.org/)
 - This is an official implementation of "Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Transitions and Fluctuations in Seasonality" (ASTD).
-- ** This paper was accepted in ECML-PKDD 2024 ** 
+- This paper was accepted in ECML-PKDD 2024: [https://doi.org/10.1007/978-3-031-70344-7_25](https://doi.org/10.1007/978-3-031-70344-7_25)
 - ASTD was implemented using Python 3.9.2.
 - Existing methods were implemented using Python 3.9.2 and R 4.3.0
 
@@ -60,14 +60,18 @@
 ** Please be careful some libraries overwrite some datasets. 
 
 ## BibTex
-- If you plan to use or apply our source code, please cite our published paper. Note that the DOI and BibTeX will be updated after our publication appears online.
+- If you plan to use or apply our source code, please cite our published paper.
 ```
-@inproceedings{ASTD_ECMLPKDD,
-	author = {Phungtua-Eng, T. and Yamamoto, Y.},
-	booktitle = {Machine Learning and Knowledge Discovery in Databases: Research Track (ECML PKDD 2024)},
-	title = {Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Transitions and Fluctuations in Seasonality},
-	year = {2024},
-	note = {(To appear)}
+@InProceedings{10.1007/978-3-031-70344-7_25,
+	author="Phungtua-eng, Thanapol and Yamamoto, Yoshitaka",
+	editor="Bifet, Albert and Davis, Jesse and Krilavi{\v{c}}ius, Tomas and Kull, Meelis and Ntoutsi, Eirini and {\v{Z}}liobait{\.{e}}, Indr{\.{e}}",
+	title="Adaptive Seasonal-Trend Decomposition for Streaming Time Series Data with Transitions and Fluctuations in Seasonality",
+	booktitle="Machine Learning and Knowledge Discovery in Databases. Research Track",
+	year="2024",
+	publisher="Springer Nature Switzerland",
+	address="Cham",
+	pages="426--443",
+	isbn="978-3-031-70344-7"
 }
 ```
 
