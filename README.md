@@ -83,5 +83,4 @@ If you have any question, please contact thanapol@yy-lab.info
 
 ## Acknowledgements
 
-We would like to thank the community and everyone who made their datasets and source codes publicly accessible. These datasets are valuable and have greatly facilitated this research. 
-
+This work was supported by JSPS KAKENHI Grant Numbers JP20K11935, JP21H04491 and 24K15086. We would also like to thank the anonymous reviewers for giving us useful and constructive comments. Additionally, we are grateful to the community and everyone who made their datasets and source codes publicly accessible. These datasets and source codes are valuable and have greatly facilitated this research.
